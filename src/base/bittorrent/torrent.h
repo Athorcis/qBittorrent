@@ -102,6 +102,7 @@ namespace BitTorrent
 
         StoppedDownloading,
         StoppedUploading,
+        Disabled,
 
         Moving,
 
@@ -324,6 +325,7 @@ namespace BitTorrent
 
         TorrentID id() const;
         bool isRunning() const;
+        bool isDisabled() const;
         qlonglong remainingSize() const;
 
         void toggleSequentialDownload();

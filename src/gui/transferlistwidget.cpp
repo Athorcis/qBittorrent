@@ -292,9 +292,14 @@ void TransferListWidget::torrentDoubleClicked()
     {
     case TOGGLE_STOP:
         if (torrent->isStopped())
-            torrent->start();
+        {
+            if (!torrent->isDisabled())
+                torrent->start();
+        }
         else
+        {
             torrent->stop();
+        }
         break;
     case PREVIEW_FILE:
         if (torrentContainsPreviewableFiles(torrent))
@@ -389,7 +394,10 @@ void TransferListWidget::startSelectedTorrents()
 void TransferListWidget::forceStartSelectedTorrents()
 {
     for (BitTorrent::Torrent *const torrent : asConst(getSelectedTorrents()))
-        torrent->start(BitTorrent::TorrentOperatingMode::Forced);
+    {
+        if (!torrent->isDisabled())
+            torrent->start(BitTorrent::TorrentOperatingMode::Forced);
+    }
 }
 
 void TransferListWidget::startVisibleTorrents()
@@ -1108,15 +1116,25 @@ void TransferListWidget::displayListMenu()
         }
 
         if (!torrent->isForced())
-            needsForce = true;
+        {
+            if (!torrent->isDisabled())
+                needsForce = true;
+        }
         else
+        {
             needsStart = true;
+        }
 
         const bool isStopped = torrent->isStopped();
         if (isStopped)
-            needsStart = true;
+        {
+            if (!torrent->isDisabled())
+                needsStart = true;
+        }
         else
+        {
             needsStop = true;
+        }
 
         if (torrent->isErrored() || torrent->hasMissingFiles())
         {

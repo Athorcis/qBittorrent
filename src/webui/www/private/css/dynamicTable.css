@@ -70,6 +70,10 @@
         background-image: url("../images/checked-completed.svg");
     }
 
+    &.stateDisabled {
+        background-image: url("../images/stopped.svg");
+    }
+
     &.stateQueued {
         background-image: url("../images/queued.svg");
     }

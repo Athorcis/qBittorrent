@@ -2798,6 +2798,11 @@ Utiliser ';' pour diviser plusieurs entrées. Le caractère générique '*' peut
         <translation>Complétés (0)</translation>
     </message>
     <message>
+        <source>Disabled (0)</source>
+        <comment>Public torrents that are fully downloaded</comment>
+        <translation>Désactivés (0)</translation>
+    </message>
+    <message>
         <source>Active (0)</source>
         <translation>Actifs (0)</translation>
     </message>
@@ -2824,6 +2829,11 @@ Utiliser ';' pour diviser plusieurs entrées. Le caractère générique '*' peut
     <message>
         <source>Completed (%1)</source>
         <translation>Complétés (%1)</translation>
+    </message>
+    <message>
+        <source>Disabled (%1)</source>
+        <comment>Public torrents that are fully downloaded</comment>
+        <translation>Désactivés (%1)</translation>
     </message>
     <message>
         <source>Active (%1)</source>
@@ -3329,6 +3339,11 @@ Utiliser ';' pour diviser plusieurs entrées. Le caractère générique '*' peut
     <message>
         <source>Stopped</source>
         <translation>Arrêté</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <comment>Torrent is public and fully downloaded</comment>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <source>N/A</source>

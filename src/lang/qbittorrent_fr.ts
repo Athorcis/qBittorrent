@@ -10441,6 +10441,12 @@ Cliquez sur le bouton « Recherche de greffons… » en bas à droite de la fen�
     </message>
     <message>
         <location filename="../gui/transferlistfilters/statusfilterwidget.cpp" line="59"/>
+        <source>Disabled (0)</source>
+        <comment>Public torrents that are fully downloaded</comment>
+        <translation>Désactivés (0)</translation>
+    </message>
+    <message>
+        <location filename="../gui/transferlistfilters/statusfilterwidget.cpp" line="62"/>
         <source>Running (0)</source>
         <translation>En cours (0)</translation>
     </message>
@@ -10511,6 +10517,12 @@ Cliquez sur le bouton « Recherche de greffons… » en bas à droite de la fen�
     </message>
     <message>
         <location filename="../gui/transferlistfilters/statusfilterwidget.cpp" line="168"/>
+        <source>Disabled (%1)</source>
+        <comment>Public torrents that are fully downloaded</comment>
+        <translation>Désactivés (%1)</translation>
+    </message>
+    <message>
+        <location filename="../gui/transferlistfilters/statusfilterwidget.cpp" line="169"/>
         <source>Running (%1)</source>
         <translation>En cours (%1)</translation>
     </message>
@@ -12248,6 +12260,12 @@ Veuillez en choisir un autre.</translation>
         <location filename="../gui/transferlistmodel.cpp" line="108"/>
         <source>Stopped</source>
         <translation>Arrêté</translation>
+    </message>
+    <message>
+        <location filename="../gui/transferlistmodel.cpp" line="111"/>
+        <source>Disabled</source>
+        <comment>Torrent is public and fully downloaded</comment>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="../gui/transferlistmodel.cpp" line="164"/>

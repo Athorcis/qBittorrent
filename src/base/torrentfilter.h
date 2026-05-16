@@ -53,6 +53,7 @@ public:
         Downloading,
         Seeding,
         Completed,
+        Disabled,
         Running,
         Stopped,
         Active,

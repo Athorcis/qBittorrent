@@ -53,6 +53,8 @@ namespace
             return u"uploading"_s;
         case BitTorrent::TorrentState::StoppedUploading:
             return u"stoppedUP"_s;
+        case BitTorrent::TorrentState::Disabled:
+            return u"disabled"_s;
         case BitTorrent::TorrentState::QueuedUploading:
             return u"queuedUP"_s;
         case BitTorrent::TorrentState::StalledUploading:

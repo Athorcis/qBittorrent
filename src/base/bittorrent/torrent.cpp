@@ -56,6 +56,11 @@ namespace BitTorrent
         return !isStopped();
     }
 
+    bool Torrent::isDisabled() const
+    {
+        return state() == TorrentState::Disabled;
+    }
+
     qlonglong Torrent::remainingSize() const
     {
         return wantedSize() - completedSize();

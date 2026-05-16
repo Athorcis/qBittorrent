@@ -609,6 +609,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
         updateFilter("downloading", "QBT_TR(Downloading (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
         updateFilter("seeding", "QBT_TR(Seeding (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
         updateFilter("completed", "QBT_TR(Completed (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
+        updateFilter("disabled", "QBT_TR(Disabled (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
         updateFilter("running", "QBT_TR(Running (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
         updateFilter("stopped", "QBT_TR(Stopped (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
         updateFilter("active", "QBT_TR(Active (%1))QBT_TR[CONTEXT=StatusFilterWidget]");
@@ -893,9 +894,10 @@ window.addEventListener("DOMContentLoaded", async (event) => {
         checkingDL: 12,
         stoppedDL: 13,
         stoppedUP: 14,
-        moving: 15,
-        missingFiles: 16,
-        error: 17
+        disabled: 15,
+        moving: 16,
+        missingFiles: 17,
+        error: 18
     });
 
     let syncMainDataTimeoutID = -1;

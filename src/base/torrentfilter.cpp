@@ -169,8 +169,10 @@ bool TorrentFilter::matchStatus(const Torrent *const torrent) const
         return torrent->isUploading();
     case Completed:
         return torrent->isCompleted();
+    case Disabled:
+        return torrent->isDisabled();
     case Stopped:
-        return torrent->isStopped();
+        return torrent->isStopped() && !torrent->isDisabled();
     case Running:
         return torrent->isRunning();
     case Active:

@@ -1204,6 +1204,9 @@ window.qBittorrent.DynamicTable ??= (() => {
                     case "stoppedUP":
                         stateClass = "stateStoppedUP";
                         break;
+                    case "disabled":
+                        stateClass = "stateDisabled";
+                        break;
                     case "queuedDL":
                     case "queuedUP":
                         stateClass = "stateQueued";
@@ -1313,6 +1316,9 @@ window.qBittorrent.DynamicTable ??= (() => {
                         break;
                     case "stoppedUP":
                         status = "QBT_TR(Completed)QBT_TR[CONTEXT=TransferListDelegate]";
+                        break;
+                    case "disabled":
+                        status = "QBT_TR(Disabled)QBT_TR[CONTEXT=TransferListDelegate]";
                         break;
                     case "moving":
                         status = "QBT_TR(Moving)QBT_TR[CONTEXT=TransferListDelegate]";
@@ -1606,15 +1612,19 @@ window.qBittorrent.DynamicTable ??= (() => {
                         return false;
                     break;
                 case "completed":
-                    if ((state !== "uploading") && !state.includes("UP"))
+                    if ((state !== "uploading") && !state.includes("UP") && (state !== "disabled"))
+                        return false;
+                    break;
+                case "disabled":
+                    if (state !== "disabled")
                         return false;
                     break;
                 case "stopped":
-                    if (!state.includes("stopped"))
+                    if (!state.includes("stopped") || (state === "disabled"))
                         return false;
                     break;
                 case "running":
-                    if (state.includes("stopped"))
+                    if (state.includes("stopped") || (state === "disabled"))
                         return false;
                     break;
                 case "stalled":
@@ -1829,10 +1839,14 @@ window.qBittorrent.DynamicTable ??= (() => {
                     && (state !== "stalledUP")
                     && (state !== "queuedUP")
                     && (state !== "checkingUP")
+                    && (state !== "disabled")
                     ? "dblclick_download"
                     : "dblclick_complete";
 
                 if (clientData.get(prefKey) !== "1")
+                    return true;
+
+                if (state === "disabled")
                     return true;
 
                 if (state.includes("stopped"))

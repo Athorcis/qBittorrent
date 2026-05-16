@@ -517,6 +517,9 @@ namespace
         if (statusStr == u"completed")
             return TorrentFilter::Completed;
 
+        if (statusStr == u"disabled")
+            return TorrentFilter::Disabled;
+
         if (statusStr == u"stopped")
             return TorrentFilter::Stopped;
 

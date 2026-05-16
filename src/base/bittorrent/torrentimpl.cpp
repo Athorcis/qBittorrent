@@ -1176,6 +1176,7 @@ bool TorrentImpl::isCompleted() const
     case TorrentState::StalledUploading:
     case TorrentState::CheckingUploading:
     case TorrentState::StoppedUploading:
+    case TorrentState::Disabled:
     case TorrentState::QueuedUploading:
     case TorrentState::ForcedUploading:
         return true;
@@ -1228,6 +1229,12 @@ TorrentState TorrentImpl::state() const
     return m_state;
 }
 
+bool TorrentImpl::shouldBeDisabled() const
+{
+    return !isPrivate() && hasMetadata() && (progress() >= 1.0) && !isChecking()
+            && !isMoveInProgress() && !hasMissingFiles() && !hasError();
+}
+
 void TorrentImpl::updateState()
 {
     if (m_nativeStatus.state == lt::torrent_status::checking_resume_data)
@@ -1262,7 +1269,9 @@ void TorrentImpl::updateState()
     }
     else if (isFinished())
     {
-        if (isStopped())
+        if (shouldBeDisabled())
+            m_state = TorrentState::Disabled;
+        else if (isStopped())
             m_state = TorrentState::StoppedUploading;
         else if (isQueued())
             m_state = TorrentState::QueuedUploading;
@@ -1272,6 +1281,10 @@ void TorrentImpl::updateState()
             m_state = TorrentState::Uploading;
         else
             m_state = TorrentState::StalledUploading;
+    }
+    else if (shouldBeDisabled())
+    {
+        m_state = TorrentState::Disabled;
     }
     else
     {
@@ -2575,6 +2588,9 @@ void TorrentImpl::updateStatus(const lt::torrent_status &nativeStatus)
         m_lastSeenComplete = QDateTime::fromSecsSinceEpoch(m_nativeStatus.last_seen_complete);
 
     updateState();
+
+    if (shouldBeDisabled() && !isStopped())
+        stop();
 
     m_payloadRateMonitor.addSample({nativeStatus.download_payload_rate
                               , nativeStatus.upload_payload_rate});

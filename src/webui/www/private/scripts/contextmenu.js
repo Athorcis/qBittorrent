@@ -330,6 +330,7 @@ window.qBittorrent.ContextMenu ??= (() => {
             let all_are_downloaded = true;
             let all_are_stopped = true;
             let there_are_stopped = false;
+            let there_are_disabled = false;
             let all_are_force_start = true;
             let there_are_force_start = false;
             let all_are_super_seeding = true;
@@ -358,7 +359,10 @@ window.qBittorrent.ContextMenu ??= (() => {
                 else if (data["super_seeding"] !== true)
                     all_are_super_seeding = false;
 
-                if ((data["state"] !== "stoppedUP") && (data["state"] !== "stoppedDL"))
+                if (data["state"] === "disabled")
+                    there_are_disabled = true;
+
+                if ((data["state"] !== "stoppedUP") && (data["state"] !== "stoppedDL") && (data["state"] !== "disabled"))
                     all_are_stopped = false;
                 else
                     there_are_stopped = true;
@@ -445,6 +449,11 @@ window.qBittorrent.ContextMenu ??= (() => {
                 this.hideItem("forceStart");
             else if (!there_are_stopped && !there_are_force_start)
                 this.hideItem("start");
+
+            if (there_are_disabled) {
+                this.hideItem("start");
+                this.hideItem("forceStart");
+            }
 
             this.setItemChecked("autoTorrentManagement", all_are_auto_tmm);
 

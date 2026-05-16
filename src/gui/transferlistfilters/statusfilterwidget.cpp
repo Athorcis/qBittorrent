@@ -55,6 +55,9 @@ StatusFilterWidget::StatusFilterWidget(QWidget *parent, TransferListWidget *tran
     auto *completed = new QListWidgetItem(this);
     completed->setData(Qt::DisplayRole, tr("Completed (0)"));
     completed->setData(Qt::DecorationRole, UIThemeManager::instance()->getIcon(u"checked-completed"_s, u"completed"_s));
+    auto *disabled = new QListWidgetItem(this);
+    disabled->setData(Qt::DisplayRole, tr("Disabled (0)", "Public torrents that are fully downloaded"));
+    disabled->setData(Qt::DecorationRole, UIThemeManager::instance()->getIcon(u"stopped"_s, u"media-playback-pause"_s));
     auto *running = new QListWidgetItem(this);
     running->setData(Qt::DisplayRole, tr("Running (0)"));
     running->setData(Qt::DecorationRole, UIThemeManager::instance()->getIcon(u"torrent-start"_s, u"media-playback-start"_s));
@@ -145,6 +148,7 @@ void StatusFilterWidget::updateTorrentStatus(const BitTorrent::Torrent *torrent)
     update(TorrentFilter::Downloading, m_nbDownloading);
     update(TorrentFilter::Seeding, m_nbSeeding);
     update(TorrentFilter::Completed, m_nbCompleted);
+    update(TorrentFilter::Disabled, m_nbDisabled);
     update(TorrentFilter::Running, m_nbRunning);
     update(TorrentFilter::Stopped, m_nbStopped);
     update(TorrentFilter::Active, m_nbActive);
@@ -165,6 +169,7 @@ void StatusFilterWidget::updateTexts()
     item(TorrentFilter::Downloading)->setData(Qt::DisplayRole, tr("Downloading (%1)").arg(m_nbDownloading));
     item(TorrentFilter::Seeding)->setData(Qt::DisplayRole, tr("Seeding (%1)").arg(m_nbSeeding));
     item(TorrentFilter::Completed)->setData(Qt::DisplayRole, tr("Completed (%1)").arg(m_nbCompleted));
+    item(TorrentFilter::Disabled)->setData(Qt::DisplayRole, tr("Disabled (%1)", "Public torrents that are fully downloaded").arg(m_nbDisabled));
     item(TorrentFilter::Running)->setData(Qt::DisplayRole, tr("Running (%1)").arg(m_nbRunning));
     item(TorrentFilter::Stopped)->setData(Qt::DisplayRole, tr("Stopped (%1)").arg(m_nbStopped));
     item(TorrentFilter::Active)->setData(Qt::DisplayRole, tr("Active (%1)").arg(m_nbActive));
@@ -182,6 +187,7 @@ void StatusFilterWidget::hideZeroItems()
     item(TorrentFilter::Downloading)->setHidden(m_nbDownloading == 0);
     item(TorrentFilter::Seeding)->setHidden(m_nbSeeding == 0);
     item(TorrentFilter::Completed)->setHidden(m_nbCompleted == 0);
+    item(TorrentFilter::Disabled)->setHidden(m_nbDisabled == 0);
     item(TorrentFilter::Running)->setHidden(m_nbRunning == 0);
     item(TorrentFilter::Stopped)->setHidden(m_nbStopped == 0);
     item(TorrentFilter::Active)->setHidden(m_nbActive == 0);
@@ -246,6 +252,8 @@ void StatusFilterWidget::torrentAboutToBeDeleted(BitTorrent::Torrent *const torr
         --m_nbSeeding;
     if (status[TorrentFilter::Completed])
         --m_nbCompleted;
+    if (status[TorrentFilter::Disabled])
+        --m_nbDisabled;
     if (status[TorrentFilter::Running])
         --m_nbRunning;
     if (status[TorrentFilter::Stopped])
