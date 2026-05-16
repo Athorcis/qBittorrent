@@ -84,6 +84,7 @@ RUN cmake -B build -G Ninja \
 RUN set -eux; \
     ldd /usr/bin/qbittorrent-nox \
         | awk '/=> \// {print $3} /^\// {print $1}' \
+        | xargs -r readlink -f \
         | xargs -r dpkg -S 2>/dev/null \
         | cut -d: -f1 \
         | sort -u > /runtime-apt-packages.txt; \
