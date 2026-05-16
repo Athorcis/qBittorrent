@@ -469,7 +469,7 @@ void WebApplication::configure()
     m_isAuthSubnetWhitelistEnabled = pref->isWebUIAuthSubnetWhitelistEnabled();
     m_authSubnetWhitelist = pref->getWebUIAuthSubnetWhitelist();
     m_sessionTimeout = std::chrono::seconds(pref->getWebUISessionTimeout());
-    m_sessionCookieName = SESSION_COOKIE_NAME_PREFIX + QString::number(pref->getWebUIPort());
+    m_sessionCookieName = u"SID"_s;
 
     // all sessions need to update the cookie expiration date
     for (WebSession *session : asConst(m_sessions))
@@ -800,11 +800,7 @@ QString WebApplication::generateSid() const
 
 bool WebApplication::isAuthNeeded()
 {
-    if (!m_isLocalAuthEnabled && m_clientAddress.isLoopback())
-        return false;
-    if (m_isAuthSubnetWhitelistEnabled && Utils::Net::isIPInSubnets(m_clientAddress, m_authSubnetWhitelist))
-        return false;
-    return true;
+    return false;
 }
 
 bool WebApplication::isPublicAPI(const QString &scope, const QString &action) const
