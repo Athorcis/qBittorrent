@@ -916,3 +916,9 @@ td.statusBarSeparator {
 .confirmWarning {
     background-image: url("../images/help-about.svg");
 }
+
+/* Masquer Déconnexion et Quitter (menu Fichier) */
+li:has(> #logoutLink),
+li:has(> #shutdownLink) {
+    display: none;
+}
