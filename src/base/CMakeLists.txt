@@ -266,6 +266,10 @@ if (NOT WEBUI)
     target_compile_definitions(qbt_base PUBLIC DISABLE_WEBUI)
 endif()
 
+if (WEBUI_LOCK_SETTINGS)
+    target_compile_definitions(qbt_base PUBLIC DISABLE_WEBUI_SETTINGS)
+endif()
+
 if (DBUS)
     target_link_libraries(qbt_base PUBLIC Qt::DBus)
 endif()

@@ -73,6 +73,54 @@
 
 using namespace std::chrono_literals;
 
+#ifdef DISABLE_WEBUI_SETTINGS
+namespace
+{
+    const QStringList lockedWebUISettingsKeys
+    {
+        u"web_ui_domain_list"_s,
+        u"web_ui_address"_s,
+        u"web_ui_port"_s,
+        u"web_ui_upnp"_s,
+        u"use_https"_s,
+        u"web_ui_https_cert_path"_s,
+        u"web_ui_https_key_path"_s,
+        u"web_ui_username"_s,
+        u"web_ui_password"_s,
+        u"bypass_local_auth"_s,
+        u"bypass_auth_subnet_whitelist_enabled"_s,
+        u"bypass_auth_subnet_whitelist"_s,
+        u"web_ui_max_auth_fail_count"_s,
+        u"web_ui_ban_duration"_s,
+        u"web_ui_session_timeout"_s,
+        u"alternative_webui_enabled"_s,
+        u"alternative_webui_path"_s,
+        u"web_ui_clickjacking_protection_enabled"_s,
+        u"web_ui_csrf_protection_enabled"_s,
+        u"web_ui_secure_cookie_enabled"_s,
+        u"web_ui_host_header_validation_enabled"_s,
+        u"web_ui_use_custom_http_headers_enabled"_s,
+        u"web_ui_custom_http_headers"_s,
+        u"web_ui_reverse_proxy_enabled"_s,
+        u"web_ui_reverse_proxies_list"_s,
+        u"dyndns_enabled"_s,
+        u"dyndns_service"_s,
+        u"dyndns_username"_s,
+        u"dyndns_password"_s,
+        u"dyndns_domain"_s
+    };
+
+    void checkWebUISettingsNotLocked(const QVariantHash &params)
+    {
+        for (const QString &key : lockedWebUISettingsKeys)
+        {
+            if (params.contains(key))
+                throw APIError(APIErrorType::AccessDenied, AppController::tr("WebUI settings cannot be modified"));
+        }
+    }
+}
+#endif // DISABLE_WEBUI_SETTINGS
+
 const QString KEY_COOKIE_NAME = u"name"_s;
 const QString KEY_COOKIE_DOMAIN = u"domain"_s;
 const QString KEY_COOKIE_PATH = u"path"_s;
@@ -328,6 +376,12 @@ void AppController::preferencesAction()
     data[u"add_trackers_url_list"_s] = session->additionalTrackersFromURL();
 
     // WebUI
+    data[u"web_ui_settings_locked"_s] =
+#ifdef DISABLE_WEBUI_SETTINGS
+        true;
+#else
+        false;
+#endif
     // HTTP Server
     data[u"web_ui_domain_list"_s] = pref->getServerDomains();
     data[u"web_ui_address"_s] = pref->getWebUIAddress();
@@ -517,6 +571,10 @@ void AppController::setPreferencesAction()
     auto *pref = Preferences::instance();
     auto *session = BitTorrent::Session::instance();
     const QVariantHash m = QJsonDocument::fromJson(params()[u"json"_s].toUtf8()).toVariant().toHash();
+
+#ifdef DISABLE_WEBUI_SETTINGS
+    checkWebUISettingsNotLocked(m);
+#endif
 
     QVariantHash::ConstIterator it;
     const auto hasKey = [&it, &m](const QString &key) -> bool
@@ -887,6 +945,7 @@ void AppController::setPreferencesAction()
     if (hasKey(u"add_trackers_url"_s))
         session->setAdditionalTrackersURL(it.value().toString());
 
+#ifndef DISABLE_WEBUI_SETTINGS
     // WebUI
     // HTTP Server
     if (hasKey(u"web_ui_domain_list"_s))
@@ -970,6 +1029,7 @@ void AppController::setPreferencesAction()
         pref->setDynDNSPassword(it.value().toString());
     if (hasKey(u"dyndns_domain"_s))
         pref->setDynDomainName(it.value().toString());
+#endif // DISABLE_WEBUI_SETTINGS
 
     if (hasKey(u"rss_refresh_interval"_s))
         RSS::Session::instance()->setRefreshInterval(it.value().toInt());
@@ -1340,6 +1400,9 @@ void AppController::setCookiesAction()
 
 void AppController::rotateAPIKeyAction()
 {
+#ifdef DISABLE_WEBUI_SETTINGS
+    throw APIError(APIErrorType::AccessDenied, tr("WebUI settings cannot be modified"));
+#else
     const QString key = Utils::APIKey::generate();
 
     auto *preferences = Preferences::instance();
@@ -1347,13 +1410,18 @@ void AppController::rotateAPIKeyAction()
     preferences->apply();
 
     setResult(QJsonObject {{u"apiKey"_s, key}});
+#endif // DISABLE_WEBUI_SETTINGS
 }
 
 void AppController::deleteAPIKeyAction()
 {
+#ifdef DISABLE_WEBUI_SETTINGS
+    throw APIError(APIErrorType::AccessDenied, tr("WebUI settings cannot be modified"));
+#else
     auto *preferences = Preferences::instance();
     preferences->setWebUIApiKey({});
     preferences->apply();
+#endif // DISABLE_WEBUI_SETTINGS
 }
 
 void AppController::networkInterfaceListAction()

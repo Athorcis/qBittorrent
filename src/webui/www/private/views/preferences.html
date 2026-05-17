@@ -1814,6 +1814,15 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
 
     window.qBittorrent ??= {};
     window.qBittorrent.Preferences ??= (() => {
+        let webUISettingsLocked = false;
+
+        const updateWebUISettingsTabVisibility = (locked) => {
+            webUISettingsLocked = locked;
+            const tabLink = window.parent.document.getElementById("PrefWebUILink");
+            if (tabLink)
+                tabLink.closest("li").classList.toggle("invisible", locked);
+        };
+
         const exports = () => {
             return {
                 setup: setup,
@@ -2293,6 +2302,8 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
         const loadPreferences = () => {
             window.parent.qBittorrent.Cache.preferences.init()
                 .then((pref) => {
+                    updateWebUISettingsTabVisibility(pref.web_ui_settings_locked === true);
+
                     const clientData = window.parent.qBittorrent.ClientData;
                     const dateFormat = clientData.get("date_format");
                     const colorScheme = clientData.get("color_scheme");
@@ -2612,6 +2623,7 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
                     document.getElementById("downlock_repack_proper_episodes").checked = pref.rss_download_repack_proper_episodes;
                     document.getElementById("rss_filter_textarea").value = pref.rss_smart_episode_filters;
 
+                    if (!webUISettingsLocked) {
                     // WebUI tab
                     // HTTP Server
                     document.getElementById("webuiDomainTextarea").value = pref.web_ui_domain_list;
@@ -2672,6 +2684,7 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
                     document.getElementById("dyndns_username_text").value = pref.dyndns_username;
                     document.getElementById("dyndns_password_text").value = pref.dyndns_password;
                     updateDynDnsSettings();
+                    }
 
                     // Advanced settings
                     // qBittorrent section
@@ -3074,6 +3087,7 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
             settings["rss_download_repack_proper_episodes"] = document.getElementById("downlock_repack_proper_episodes").checked;
             settings["rss_smart_episode_filters"] = document.getElementById("rss_filter_textarea").value;
 
+            if (!webUISettingsLocked) {
             // WebUI tab
             // HTTP Server
             settings["web_ui_domain_list"] = document.getElementById("webuiDomainTextarea").value;
@@ -3160,6 +3174,7 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
             settings["dyndns_domain"] = document.getElementById("dyndns_domain_text").value;
             settings["dyndns_username"] = document.getElementById("dyndns_username_text").value;
             settings["dyndns_password"] = document.getElementById("dyndns_password_text").value;
+            }
 
             // Update advanced settings
             // qBittorrent section

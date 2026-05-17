@@ -74,6 +74,7 @@ RUN cmake -B build -G Ninja \
         -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
         -DBOOST_ROOT=/boost/lib/cmake \
         -DGUI=OFF \
+        -DWEBUI_LOCK_SETTINGS=ON \
         -DSTACKTRACE=OFF \
         -DTESTING=OFF \
     && cmake --build build -j"$(nproc)" \
