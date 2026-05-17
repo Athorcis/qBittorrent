@@ -2624,66 +2624,66 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
                     document.getElementById("rss_filter_textarea").value = pref.rss_smart_episode_filters;
 
                     if (!webUISettingsLocked) {
-                    // WebUI tab
-                    // HTTP Server
-                    document.getElementById("webuiDomainTextarea").value = pref.web_ui_domain_list;
-                    document.getElementById("webuiAddressValue").value = pref.web_ui_address;
-                    document.getElementById("webuiPortValue").value = pref.web_ui_port;
-                    document.getElementById("webuiUpnpCheckbox").checked = pref.web_ui_upnp;
-                    document.getElementById("use_https_checkbox").checked = pref.use_https;
-                    document.getElementById("ssl_cert_text").value = pref.web_ui_https_cert_path;
-                    document.getElementById("ssl_key_text").value = pref.web_ui_https_key_path;
-                    updateHttpsSettings();
+                        // WebUI tab
+                        // HTTP Server
+                        document.getElementById("webuiDomainTextarea").value = pref.web_ui_domain_list;
+                        document.getElementById("webuiAddressValue").value = pref.web_ui_address;
+                        document.getElementById("webuiPortValue").value = pref.web_ui_port;
+                        document.getElementById("webuiUpnpCheckbox").checked = pref.web_ui_upnp;
+                        document.getElementById("use_https_checkbox").checked = pref.use_https;
+                        document.getElementById("ssl_cert_text").value = pref.web_ui_https_cert_path;
+                        document.getElementById("ssl_key_text").value = pref.web_ui_https_key_path;
+                        updateHttpsSettings();
 
-                    // Authentication
-                    document.getElementById("webui_username_text").value = pref.web_ui_username;
-                    document.getElementById("bypass_local_auth_checkbox").checked = pref.bypass_local_auth;
-                    document.getElementById("bypass_auth_subnet_whitelist_checkbox").checked = pref.bypass_auth_subnet_whitelist_enabled;
-                    document.getElementById("bypass_auth_subnet_whitelist_textarea").value = pref.bypass_auth_subnet_whitelist;
-                    updateBypasssAuthSettings();
-                    document.getElementById("webUIMaxAuthFailCountInput").value = Number(pref.web_ui_max_auth_fail_count);
-                    document.getElementById("webUIBanDurationInput").value = Number(pref.web_ui_ban_duration);
-                    document.getElementById("webUISessionTimeoutInput").value = Number(pref.web_ui_session_timeout);
+                        // Authentication
+                        document.getElementById("webui_username_text").value = pref.web_ui_username;
+                        document.getElementById("bypass_local_auth_checkbox").checked = pref.bypass_local_auth;
+                        document.getElementById("bypass_auth_subnet_whitelist_checkbox").checked = pref.bypass_auth_subnet_whitelist_enabled;
+                        document.getElementById("bypass_auth_subnet_whitelist_textarea").value = pref.bypass_auth_subnet_whitelist;
+                        updateBypasssAuthSettings();
+                        document.getElementById("webUIMaxAuthFailCountInput").value = Number(pref.web_ui_max_auth_fail_count);
+                        document.getElementById("webUIBanDurationInput").value = Number(pref.web_ui_ban_duration);
+                        document.getElementById("webUISessionTimeoutInput").value = Number(pref.web_ui_session_timeout);
 
-                    // API key
-                    if (pref.web_ui_api_key.length > 0) {
-                        document.getElementById("WebUIAPIKeyText").value = maskAPIKey(pref.web_ui_api_key);
-                        document.getElementById("WebUIAPIKeyText").dataset.apiKey = pref.web_ui_api_key;
-                        document.getElementById("webUIAPIKeyCopyButton").disabled = false;
-                        document.getElementById("webUIAPIKeyRotateButton").dataset.hasKey = "true";
-                        document.querySelector("#webUIAPIKeyRotateButton img").title = "QBT_TR(Rotate API key)QBT_TR[CONTEXT=OptionsDialog]";
-                        document.getElementById("webUIAPIKeyDeleteButton").disabled = false;
-                    }
+                        // API key
+                        if (pref.web_ui_api_key.length > 0) {
+                            document.getElementById("WebUIAPIKeyText").value = maskAPIKey(pref.web_ui_api_key);
+                            document.getElementById("WebUIAPIKeyText").dataset.apiKey = pref.web_ui_api_key;
+                            document.getElementById("webUIAPIKeyCopyButton").disabled = false;
+                            document.getElementById("webUIAPIKeyRotateButton").dataset.hasKey = "true";
+                            document.querySelector("#webUIAPIKeyRotateButton img").title = "QBT_TR(Rotate API key)QBT_TR[CONTEXT=OptionsDialog]";
+                            document.getElementById("webUIAPIKeyDeleteButton").disabled = false;
+                        }
 
-                    // Use alternative WebUI
-                    document.getElementById("use_alt_webui_checkbox").checked = pref.alternative_webui_enabled;
-                    document.getElementById("webui_files_location_textarea").value = pref.alternative_webui_path;
-                    updateAlternativeWebUISettings();
+                        // Use alternative WebUI
+                        document.getElementById("use_alt_webui_checkbox").checked = pref.alternative_webui_enabled;
+                        document.getElementById("webui_files_location_textarea").value = pref.alternative_webui_path;
+                        updateAlternativeWebUISettings();
 
-                    // Security
-                    document.getElementById("clickjacking_protection_checkbox").checked = pref.web_ui_clickjacking_protection_enabled;
-                    document.getElementById("csrf_protection_checkbox").checked = pref.web_ui_csrf_protection_enabled;
-                    document.getElementById("secureCookieCheckbox").checked = pref.web_ui_secure_cookie_enabled;
-                    document.getElementById("host_header_validation_checkbox").checked = pref.web_ui_host_header_validation_enabled;
-                    updateHostHeaderValidationSettings();
+                        // Security
+                        document.getElementById("clickjacking_protection_checkbox").checked = pref.web_ui_clickjacking_protection_enabled;
+                        document.getElementById("csrf_protection_checkbox").checked = pref.web_ui_csrf_protection_enabled;
+                        document.getElementById("secureCookieCheckbox").checked = pref.web_ui_secure_cookie_enabled;
+                        document.getElementById("host_header_validation_checkbox").checked = pref.web_ui_host_header_validation_enabled;
+                        updateHostHeaderValidationSettings();
 
-                    // Custom HTTP headers
-                    document.getElementById("webUIUseCustomHTTPHeadersCheckbox").checked = pref.web_ui_use_custom_http_headers_enabled;
-                    document.getElementById("webUICustomHTTPHeadersTextarea").value = pref.web_ui_custom_http_headers;
-                    updateWebUICustomHTTPHeadersSettings();
+                        // Custom HTTP headers
+                        document.getElementById("webUIUseCustomHTTPHeadersCheckbox").checked = pref.web_ui_use_custom_http_headers_enabled;
+                        document.getElementById("webUICustomHTTPHeadersTextarea").value = pref.web_ui_custom_http_headers;
+                        updateWebUICustomHTTPHeadersSettings();
 
-                    // Reverse Proxy
-                    document.getElementById("webUIReverseProxySupportCheckbox").checked = pref.web_ui_reverse_proxy_enabled;
-                    document.getElementById("webUIReverseProxiesListTextarea").value = pref.web_ui_reverse_proxies_list;
-                    updateWebUIReverseProxySettings();
+                        // Reverse Proxy
+                        document.getElementById("webUIReverseProxySupportCheckbox").checked = pref.web_ui_reverse_proxy_enabled;
+                        document.getElementById("webUIReverseProxiesListTextarea").value = pref.web_ui_reverse_proxies_list;
+                        updateWebUIReverseProxySettings();
 
-                    // Update my dynamic domain name
-                    document.getElementById("use_dyndns_checkbox").checked = pref.dyndns_enabled;
-                    document.getElementById("dyndns_select").value = pref.dyndns_service;
-                    document.getElementById("dyndns_domain_text").value = pref.dyndns_domain;
-                    document.getElementById("dyndns_username_text").value = pref.dyndns_username;
-                    document.getElementById("dyndns_password_text").value = pref.dyndns_password;
-                    updateDynDnsSettings();
+                        // Update my dynamic domain name
+                        document.getElementById("use_dyndns_checkbox").checked = pref.dyndns_enabled;
+                        document.getElementById("dyndns_select").value = pref.dyndns_service;
+                        document.getElementById("dyndns_domain_text").value = pref.dyndns_domain;
+                        document.getElementById("dyndns_username_text").value = pref.dyndns_username;
+                        document.getElementById("dyndns_password_text").value = pref.dyndns_password;
+                        updateDynDnsSettings();
                     }
 
                     // Advanced settings
@@ -3088,92 +3088,92 @@ Use ';' to split multiple entries. Can use wildcard '*'.)QBT_TR[CONTEXT=OptionsD
             settings["rss_smart_episode_filters"] = document.getElementById("rss_filter_textarea").value;
 
             if (!webUISettingsLocked) {
-            // WebUI tab
-            // HTTP Server
-            settings["web_ui_domain_list"] = document.getElementById("webuiDomainTextarea").value;
-            const webUIAddress = document.getElementById("webuiAddressValue").value.toString();
-            const webUIPort = Number(document.getElementById("webuiPortValue").value);
-            if (Number.isNaN(webUIPort) || (webUIPort < 1) || (webUIPort > 65535)) {
-                alert("QBT_TR(The port used for the WebUI must be between 1 and 65535.)QBT_TR[CONTEXT=HttpServer]");
-                return;
-            }
-            settings["web_ui_address"] = webUIAddress;
-            settings["web_ui_port"] = webUIPort;
-            settings["web_ui_upnp"] = document.getElementById("webuiUpnpCheckbox").checked;
+                // WebUI tab
+                // HTTP Server
+                settings["web_ui_domain_list"] = document.getElementById("webuiDomainTextarea").value;
+                const webUIAddress = document.getElementById("webuiAddressValue").value.toString();
+                const webUIPort = Number(document.getElementById("webuiPortValue").value);
+                if (Number.isNaN(webUIPort) || (webUIPort < 1) || (webUIPort > 65535)) {
+                    alert("QBT_TR(The port used for the WebUI must be between 1 and 65535.)QBT_TR[CONTEXT=HttpServer]");
+                    return;
+                }
+                settings["web_ui_address"] = webUIAddress;
+                settings["web_ui_port"] = webUIPort;
+                settings["web_ui_upnp"] = document.getElementById("webuiUpnpCheckbox").checked;
 
-            const useHTTPS = document.getElementById("use_https_checkbox").checked;
-            settings["use_https"] = useHTTPS;
+                const useHTTPS = document.getElementById("use_https_checkbox").checked;
+                settings["use_https"] = useHTTPS;
 
-            const httpsCertificate = document.getElementById("ssl_cert_text").value;
-            settings["web_ui_https_cert_path"] = httpsCertificate;
-            if (useHTTPS && (httpsCertificate.length === 0)) {
-                alert("QBT_TR(HTTPS certificate should not be empty)QBT_TR[CONTEXT=OptionsDialog]");
-                return;
-            }
+                const httpsCertificate = document.getElementById("ssl_cert_text").value;
+                settings["web_ui_https_cert_path"] = httpsCertificate;
+                if (useHTTPS && (httpsCertificate.length === 0)) {
+                    alert("QBT_TR(HTTPS certificate should not be empty)QBT_TR[CONTEXT=OptionsDialog]");
+                    return;
+                }
 
-            const httpsKey = document.getElementById("ssl_key_text").value;
-            settings["web_ui_https_key_path"] = httpsKey;
-            if (useHTTPS && (httpsKey.length === 0)) {
-                alert("QBT_TR(HTTPS key should not be empty)QBT_TR[CONTEXT=OptionsDialog]");
-                return;
-            }
+                const httpsKey = document.getElementById("ssl_key_text").value;
+                settings["web_ui_https_key_path"] = httpsKey;
+                if (useHTTPS && (httpsKey.length === 0)) {
+                    alert("QBT_TR(HTTPS key should not be empty)QBT_TR[CONTEXT=OptionsDialog]");
+                    return;
+                }
 
-            // Authentication
-            const web_ui_username = document.getElementById("webui_username_text").value;
-            if (web_ui_username.length < 3) {
-                alert("QBT_TR(The WebUI username must be at least 3 characters long.)QBT_TR[CONTEXT=OptionsDialog]");
-                return;
-            }
-            if (web_ui_username.includes(":")) {
-                alert("QBT_TR(The WebUI username must not contain a colon.)QBT_TR[CONTEXT=OptionsDialog]");
-                return;
-            }
-            const web_ui_password = document.getElementById("webui_password_text").value;
-            if ((0 < web_ui_password.length) && (web_ui_password.length < 6)) {
-                alert("QBT_TR(The WebUI password must be at least 6 characters long.)QBT_TR[CONTEXT=OptionsDialog]");
-                return;
-            }
+                // Authentication
+                const web_ui_username = document.getElementById("webui_username_text").value;
+                if (web_ui_username.length < 3) {
+                    alert("QBT_TR(The WebUI username must be at least 3 characters long.)QBT_TR[CONTEXT=OptionsDialog]");
+                    return;
+                }
+                if (web_ui_username.includes(":")) {
+                    alert("QBT_TR(The WebUI username must not contain a colon.)QBT_TR[CONTEXT=OptionsDialog]");
+                    return;
+                }
+                const web_ui_password = document.getElementById("webui_password_text").value;
+                if ((0 < web_ui_password.length) && (web_ui_password.length < 6)) {
+                    alert("QBT_TR(The WebUI password must be at least 6 characters long.)QBT_TR[CONTEXT=OptionsDialog]");
+                    return;
+                }
 
-            settings["web_ui_username"] = web_ui_username;
-            if (web_ui_password.length > 0)
-                settings["web_ui_password"] = web_ui_password;
-            settings["bypass_local_auth"] = document.getElementById("bypass_local_auth_checkbox").checked;
-            settings["bypass_auth_subnet_whitelist_enabled"] = document.getElementById("bypass_auth_subnet_whitelist_checkbox").checked;
-            settings["bypass_auth_subnet_whitelist"] = document.getElementById("bypass_auth_subnet_whitelist_textarea").value;
-            settings["web_ui_max_auth_fail_count"] = Number(document.getElementById("webUIMaxAuthFailCountInput").value);
-            settings["web_ui_ban_duration"] = Number(document.getElementById("webUIBanDurationInput").value);
-            settings["web_ui_session_timeout"] = Number(document.getElementById("webUISessionTimeoutInput").value);
+                settings["web_ui_username"] = web_ui_username;
+                if (web_ui_password.length > 0)
+                    settings["web_ui_password"] = web_ui_password;
+                settings["bypass_local_auth"] = document.getElementById("bypass_local_auth_checkbox").checked;
+                settings["bypass_auth_subnet_whitelist_enabled"] = document.getElementById("bypass_auth_subnet_whitelist_checkbox").checked;
+                settings["bypass_auth_subnet_whitelist"] = document.getElementById("bypass_auth_subnet_whitelist_textarea").value;
+                settings["web_ui_max_auth_fail_count"] = Number(document.getElementById("webUIMaxAuthFailCountInput").value);
+                settings["web_ui_ban_duration"] = Number(document.getElementById("webUIBanDurationInput").value);
+                settings["web_ui_session_timeout"] = Number(document.getElementById("webUISessionTimeoutInput").value);
 
-            // Use alternative WebUI
-            const alternative_webui_enabled = document.getElementById("use_alt_webui_checkbox").checked;
-            const webui_files_location_textarea = document.getElementById("webui_files_location_textarea").value;
-            if (alternative_webui_enabled && (webui_files_location_textarea.trim() === "")) {
-                alert("QBT_TR(The alternative WebUI files location cannot be blank.)QBT_TR[CONTEXT=OptionsDialog]");
-                return;
-            }
-            settings["alternative_webui_enabled"] = alternative_webui_enabled;
-            settings["alternative_webui_path"] = webui_files_location_textarea;
+                // Use alternative WebUI
+                const alternative_webui_enabled = document.getElementById("use_alt_webui_checkbox").checked;
+                const webui_files_location_textarea = document.getElementById("webui_files_location_textarea").value;
+                if (alternative_webui_enabled && (webui_files_location_textarea.trim() === "")) {
+                    alert("QBT_TR(The alternative WebUI files location cannot be blank.)QBT_TR[CONTEXT=OptionsDialog]");
+                    return;
+                }
+                settings["alternative_webui_enabled"] = alternative_webui_enabled;
+                settings["alternative_webui_path"] = webui_files_location_textarea;
 
-            // Security
-            settings["web_ui_clickjacking_protection_enabled"] = document.getElementById("clickjacking_protection_checkbox").checked;
-            settings["web_ui_csrf_protection_enabled"] = document.getElementById("csrf_protection_checkbox").checked;
-            settings["web_ui_secure_cookie_enabled"] = document.getElementById("secureCookieCheckbox").checked;
-            settings["web_ui_host_header_validation_enabled"] = document.getElementById("host_header_validation_checkbox").checked;
+                // Security
+                settings["web_ui_clickjacking_protection_enabled"] = document.getElementById("clickjacking_protection_checkbox").checked;
+                settings["web_ui_csrf_protection_enabled"] = document.getElementById("csrf_protection_checkbox").checked;
+                settings["web_ui_secure_cookie_enabled"] = document.getElementById("secureCookieCheckbox").checked;
+                settings["web_ui_host_header_validation_enabled"] = document.getElementById("host_header_validation_checkbox").checked;
 
-            // Custom HTTP headers
-            settings["web_ui_use_custom_http_headers_enabled"] = document.getElementById("webUIUseCustomHTTPHeadersCheckbox").checked;
-            settings["web_ui_custom_http_headers"] = document.getElementById("webUICustomHTTPHeadersTextarea").value;
+                // Custom HTTP headers
+                settings["web_ui_use_custom_http_headers_enabled"] = document.getElementById("webUIUseCustomHTTPHeadersCheckbox").checked;
+                settings["web_ui_custom_http_headers"] = document.getElementById("webUICustomHTTPHeadersTextarea").value;
 
-            // Reverse Proxy
-            settings["web_ui_reverse_proxy_enabled"] = document.getElementById("webUIReverseProxySupportCheckbox").checked;
-            settings["web_ui_reverse_proxies_list"] = document.getElementById("webUIReverseProxiesListTextarea").value;
+                // Reverse Proxy
+                settings["web_ui_reverse_proxy_enabled"] = document.getElementById("webUIReverseProxySupportCheckbox").checked;
+                settings["web_ui_reverse_proxies_list"] = document.getElementById("webUIReverseProxiesListTextarea").value;
 
-            // Update my dynamic domain name
-            settings["dyndns_enabled"] = document.getElementById("use_dyndns_checkbox").checked;
-            settings["dyndns_service"] = Number(document.getElementById("dyndns_select").value);
-            settings["dyndns_domain"] = document.getElementById("dyndns_domain_text").value;
-            settings["dyndns_username"] = document.getElementById("dyndns_username_text").value;
-            settings["dyndns_password"] = document.getElementById("dyndns_password_text").value;
+                // Update my dynamic domain name
+                settings["dyndns_enabled"] = document.getElementById("use_dyndns_checkbox").checked;
+                settings["dyndns_service"] = Number(document.getElementById("dyndns_select").value);
+                settings["dyndns_domain"] = document.getElementById("dyndns_domain_text").value;
+                settings["dyndns_username"] = document.getElementById("dyndns_username_text").value;
+                settings["dyndns_password"] = document.getElementById("dyndns_password_text").value;
             }
 
             // Update advanced settings
