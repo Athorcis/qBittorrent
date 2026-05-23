@@ -72,15 +72,20 @@ if [ -n "${UMASK:-}" ]; then
     umask "$UMASK"
 fi
 
+if command -v ionice >/dev/null 2>&1 && ionice -c 2 -n 7 true >/dev/null 2>&1
+then
+    argIonice="ionice -c 2 -n 7"
+fi
+
 if [ "$isRoot" = "1" ]; then
-    exec gosu qbtuser qbittorrent-nox \
+    exec $argIonice gosu qbtuser qbittorrent-nox \
         $argLegalNotice \
         --profile="$profilePath" \
         $argTorrentingPort \
         $argWebUIPort \
         "$@"
 else
-    exec qbittorrent-nox \
+    exec $argIonice qbittorrent-nox \
         $argLegalNotice \
         --profile="$profilePath" \
         $argTorrentingPort \
