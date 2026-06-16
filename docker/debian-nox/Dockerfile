@@ -4,7 +4,7 @@
 
 ARG DEBIAN_IMAGE=debian:trixie-slim
 ARG BOOST_VERSION=1.91.0
-ARG LIBTORRENT_TAG=v2.0.12
+ARG LIBTORRENT_TAG=v2.0.13
 
 # -----------------------------------------------------------------------------
 # Build
