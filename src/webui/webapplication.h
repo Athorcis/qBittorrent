@@ -275,7 +275,7 @@ private:
     bool m_isHttpsEnabled = false;
 
     // Reverse proxy
-    bool m_isReverseProxySupportEnabled = false;
+    bool m_isReverseProxySupportEnabled = true;
     QList<Utils::Net::Subnet> m_trustedReverseProxyList;
     QHostAddress m_clientAddress;
 

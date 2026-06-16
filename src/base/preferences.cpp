@@ -1101,7 +1101,7 @@ void Preferences::setWebUICustomHTTPHeaders(const QString &headers)
 
 bool Preferences::isWebUIReverseProxySupportEnabled() const
 {
-    return value(u"Preferences/WebUI/ReverseProxySupportEnabled"_s, false);
+    return value(u"Preferences/WebUI/ReverseProxySupportEnabled"_s, true);
 }
 
 void Preferences::setWebUIReverseProxySupportEnabled(const bool enabled)

@@ -557,7 +557,7 @@ void WebApplication::configure()
         }
 
         if (m_trustedReverseProxyList.isEmpty())
-            m_isReverseProxySupportEnabled = false;
+            m_isReverseProxySupportEnabled = true;
     }
 
     if (const QString apiKey = pref->getWebUIApiKey(); apiKey.isEmpty() || Utils::APIKey::isValid(apiKey))
@@ -659,7 +659,7 @@ Http::Response WebApplication::processRequest(const Http::Request &request, cons
         if ((!isUsingApiKey && m_isCSRFProtectionEnabled && isCrossSiteRequest(m_request))
             || (m_isHostHeaderValidationEnabled && !validateHostHeader(m_domainList)))
         {
-            throw UnauthorizedHTTPError();
+           throw UnauthorizedHTTPError();
         }
 
         // reverse proxy resolve client address
