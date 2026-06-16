@@ -607,7 +607,7 @@ void TransferListWidget::openSelectedTorrentsFolder()
         if (!paths.contains(openedPath))
         {
             if (torrent->filesCount() == 1)
-                Utils::Gui::openFolderSelect(openedPath, this);
+                Utils::Gui::openFolderSelect(openedPath);
             else
                 Utils::Gui::openPath(openedPath);
         }
@@ -624,7 +624,7 @@ void TransferListWidget::openDestinationFolder(const BitTorrent::Torrent *const 
     MacUtils::openFiles({openedPath});
 #else
     if (torrent->filesCount() == 1)
-        Utils::Gui::openFolderSelect(openedPath, this);
+        Utils::Gui::openFolderSelect(openedPath);
     else
         Utils::Gui::openPath(openedPath);
 #endif
