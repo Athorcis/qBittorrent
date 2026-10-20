@@ -27,6 +27,7 @@ feature_option_dependent(WEBUI_LOCK_SETTINGS
     "Prevent WebUI-related preferences from being changed via the Web API"
     OFF "WEBUI" OFF
 )
+feature_option(PLUGINS "Enable built-in Lua plugins engine" ON)
 feature_option(STACKTRACE "Enable stacktrace support" ON)
 feature_option(TESTING "Build internal testing suite" OFF)
 feature_option(VERBOSE_CONFIGURE "Show information about PACKAGES_FOUND and PACKAGES_NOT_FOUND in the configure output (only useful for debugging the CMake build scripts)" OFF)

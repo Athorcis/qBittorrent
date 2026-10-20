@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Bittorrent Client using Qt and libtorrent.
  * Copyright (C) 2026  Mark Yu (vafada)
  *
