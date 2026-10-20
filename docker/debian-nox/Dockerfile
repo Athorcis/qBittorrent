@@ -3,8 +3,8 @@
 # Bookworm : Qt < 6.6 → trixie-slim (Debian testing, toujours minimal).
 
 ARG DEBIAN_IMAGE=debian:trixie-slim
-ARG BOOST_VERSION=1.91.0
-ARG LIBTORRENT_TAG=v2.0.15
+ARG BOOST_VERSION=1.92.0
+ARG LIBTORRENT_TAG=v2.1.2
 
 # -----------------------------------------------------------------------------
 # Build
