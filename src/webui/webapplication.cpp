@@ -600,7 +600,7 @@ void WebApplication::configure()
         }
 
         if (m_trustedReverseProxyList.isEmpty())
-            m_isReverseProxySupportEnabled = false;
+            m_isReverseProxySupportEnabled = true;
     }
 
     if (const QString apiKey = pref->getWebUIApiKey(); apiKey.isEmpty() || Utils::APIKey::isValid(apiKey))
